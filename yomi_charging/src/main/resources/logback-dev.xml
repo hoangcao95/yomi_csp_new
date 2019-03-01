@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <!--  local server log -->
+    <property name="logging.directory" value="/yomi_billing/logs-yomi"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${MESSAGE_FORMAT}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+
+    <appender name="DEVELOPMENT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         	<!-- daily and size rollover -->
+            <fileNamePattern>${logging.directory}/${prefix}-log-for-development-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+        	<charset>UTF-8</charset>
+            <pattern>${MESSAGE_FORMAT}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+     
+  
+   <!--  loggers define -->	
+    <!-- Log all SQL DML statements as they are executed: level = ON,OFF -->
+    <logger name="org.hibernate.SQL" level="ON"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <!--   BasicBinder level = TRACE,OFF-->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="OFF"/>
+    <logger name="org.springframework.security" level="INFO" />
+    <logger name="org.springframework.security.oauth2" level="INFO" />
+    
+    
+   
+    <logger name="vn.yotel" level="DEBUG"/>
+    <logger name="vn.yotel.commons.rest.filter" level="DEBUG"/>
+    <logger name="vn.hathanhtelecom" level="DEBUG"/>
+
+	<root level="DEBUG" > 
+   		  <appender-ref ref="CONSOLE"/>
+   		  <appender-ref ref="DEVELOPMENT"/>
+    </root>
+</included>
+

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+	<head th:replace="fragments/init :: head">
+   		<title>Title List</title>    
+ 	</head>
+
+    <body>
+
+        <div id="wrapper">
+            <div id="nav_id" th:replace="nav :: nav">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                    </div>
+                    <!-- /.navbar-header -->
+
+                    <ul class="nav navbar-top-links navbar-right">
+                    </ul>
+                    <!-- /.navbar-top-links -->
+
+                    <div class="navbar-default navbar-static-side" role="navigation">
+                    </div>
+                    <!-- /.navbar-static-side -->
+                </nav>
+            </div>
+            <div id="page-wrapper" style="min-height: 600px;">
+	            <div class="row" style="padding-top: 30px;">
+	                <div class="col-lg-4">
+	                    <div class="jumbotron">
+	                        <p>Thực hiện đọc lại tham số các tiến trình. Sau khi thay đổi cần dừng và chạy lại tiến trình để áp dụng giá trị tham số mới.</p>
+	                        <p><a class="btn btn-primary btn-lg" role="button" id="btnReloadThreadConfig">Thực hiện</a>
+	                        </p>
+	                    </div>
+	                </div>
+	                <div class="col-lg-4">
+	                	<div class="jumbotron">
+	                        <p>Thực hiện khởi chạy hết các tiền trình.</p>
+	                        <p><a class="btn btn-primary btn-lg" role="button" id="btnStartAllThreads">Thực hiện</a>
+	                        </p>
+                        </div>
+	                </div>
+	                <div class="col-lg-4">
+	                	<div class="jumbotron">
+	                        <p>Thực hiện dừng hết các tiền trình.</p>
+	                        <p><a class="btn btn-danger btn-lg" role="button" id="btnStopAllThreads">Dừng luôn</a>
+	                        </p>
+                        </div>
+	                </div>
+	                <!-- /.col-lg-12 -->
+	            </div>
+	            <div class="row">
+	                <div class="col-lg-12">
+	                	<textarea id ="txtResp" rows="5" cols="100%" style="width: 100%"></textarea>
+	                </div>
+				</div>
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- Core Scripts - Include with every page -->
+        <script src="../../../resources/sb-admin-v2/js/jquery-1.10.2.js" th:src="@{/resources/sb-admin-v2/js/jquery-1.10.2.js}"></script>
+        <script src="../../../resources/sb-admin-v2/js/bootstrap.min.js" th:src="@{/resources/sb-admin-v2/js/bootstrap.min.js}"></script>
+        <script src="../../../resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+
+        <!-- Page-Level Plugin Scripts - Dashboard -->
+        <script src="../../../resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js}"></script>
+        <script src="../../../resources/sb-admin-v2/js/plugins/morris/morris.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/morris.js}"></script>
+        <!-- Page-Level Plugin Scripts - Tables -->
+        <script src="../../../resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js" th:src="@{/resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js}"></script>
+
+
+        <!-- SB Admin Scripts - Include with every page -->
+        <script src="../../../resources/sb-admin-v2/js/sb-admin.js" th:src="@{/resources/sb-admin-v2/js/sb-admin.js}"></script>
+
+	    <script th:inline="javascript">
+	    	/*<![CDATA[*/
+	    		var currUrl = /*[[@{/}]]*/ "";
+	    	/*]]>*/
+		</script>
+        <script>
+	        $(document).ready(function() {
+	        	$('#btnReloadThreadConfig').bind('click', function(event) {
+		        	var reqUrl = currUrl + "/utility/reload_thead_config.html"; 
+	        		$.ajax({
+	    			    url: reqUrl,
+	    			    data: {
+	    			    },
+	    			    success: function( response ) {
+	    			    	console.log( response );
+	    			    	$('#txtResp').val(response);
+	    			    }
+	    			});
+	            });
+
+	        	$('#btnReloadSmsSyntaxConfig').bind('click', function(event) {
+		        	var reqUrl = currUrl + "/utility/reload_package_sms_syntax.html"; 
+	        		$.ajax({
+	    			    url: reqUrl,
+	    			    data: {
+	    			    },
+	    			    success: function( response ) {
+	    			    	console.log( response );
+	    			    	$('#txtResp').val(response);
+	    			    }
+	    			});
+	            });
+	        	$('#btnStopAllThreads').bind('click', function(event) {
+		        	var reqUrl = currUrl + "/utility/stop_threads.html"; 
+	        		$.ajax({
+	    			    url: reqUrl,
+	    			    data: {
+	    			    },
+	    			    success: function( response ) {
+	    			    	console.log( response );
+	    			    	$('#txtResp').val(response);
+	    			    }
+	    			});
+	            });
+	        	$('#btnStartAllThreads').bind('click', function(event) {
+		        	var reqUrl = currUrl + "/utility/start_threads.html"; 
+	        		$.ajax({
+	    			    url: reqUrl,
+	    			    data: {
+	    			    },
+	    			    success: function( response ) {
+	    			    	console.log( response );
+	    			    	$('#txtResp').val(response);
+	    			    }
+	    			});
+	            });
+	        });
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="fragments/init :: head">
+   		<title>Title List</title>    
+ 	</head>
+
+    <body>
+        <div id="wrapper">
+            <div id="nav_id" th:replace="nav :: nav">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                    </div>
+                    <!-- /.navbar-header -->
+
+                    <ul class="nav navbar-top-links navbar-right">
+                    </ul>
+                    <!-- /.navbar-top-links -->
+
+                    <div class="navbar-default navbar-static-side" role="navigation">
+                    </div>
+                    <!-- /.navbar-static-side -->
+                </nav>
+            </div>
+            <div id="page-wrapper" style="min-height: 600px;">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="page-header">Danh sách tiến trình: chế độ <span th:text=" ${haMode}" style="color: red;"> MASTER</span></h4>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info" th:if="${threads} != null">
+                            <div class="panel-heading">
+                                Danh sách tiến trình đang quản lý
+                                <div class="btn-group pull-right">
+                                		<a id = "btnStartThreads" href="#" th:href="@{/utility/start_threads.html}"><i class="fa fa-play-circle-o fa-2x"></i></a>
+                                		<a id = "btnStopThreads" href="#" th:href="@{/utility/stop_threads.html}"><i class="fa fa-stop fa-2x"></i></a>
+									<a id = "btnRefresh" href="#" th:href="@{/thread/list.html}"><i class="fa fa-refresh fa-fw fa-2x"></i></a>
+	                            </div>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Thread ID/Name</th>
+                                                <th>State</th>
+                                                <th>Info</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="oneThread, iterStat : ${threads}">
+                                                <td>
+                                                    <!-- <a href="#" th:href="@{/thread/{id}/update.html(id=${oneThread.id})}" th:text="${iterStat.count}">1</a> -->
+                                                    <a href="#" th:href="@{/thread/list.html}" th:text="${iterStat.count}">1</a>
+                                                </td>
+                                                <td >
+                                                	<h4 th:text="${oneThread.id}">ID</h4>
+                                                	<p th:text="${oneThread.name}">Name</p>
+                                                </td>
+                                                <td>
+                                                	<span class="btn btn-success" th:if="${oneThread.status} == true" th:text="Running">Running</span>
+                                                	<span class="btn btn-warning" th:if="${oneThread.status} == false" th:text="Stopped">Stopped</span>
+                                                </td>
+                                                <td th:switch="${#strings.toString(oneThread.state)}">
+                                                	<span th:case="0" class="btn btn-info">Normal</span>
+                                                	<span th:case="1" class="btn btn-info">Info</span>
+                                                	<span th:case="2" class="btn btn-warning">Warn</span>
+                                                	<span th:case="3" class="btn btn-danger">Error</span>
+                                                	<span th:case="4" class="btn btn-success">Idle</span>
+                                                </td>
+
+                                                <td>
+<!--                                                 	<p>
+              											<input id="switch-state" type="checkbox" checked="checked" th:value="@{/thread/{id}/stop.html(id=${oneThread.id})}"/>
+            										</p>
+ -->                                                    <a type="button" class="btn btn-danger" th:if="${oneThread.status} == true" href="#" th:href="@{/thread/{id}/stop.html(id=${oneThread.id})}"><i class="fa fa-power-off"></i> Stop</a>
+                                                    	<a type="button" class="btn btn-primary" th:if="${oneThread.status} == false" href="#" th:href="@{/thread/{id}/start.html(id=${oneThread.id})}"><i class="fa fa-power-off"></i> Start</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+		<div th:replace="fragments/init :: commonScript"></div>
+		<!-- Core Scripts - Include with every page -->
+        <script src="../../resources/sb-admin-v2/js/jquery-1.10.2.js" th:src="@{/resources/sb-admin-v2/js/jquery-1.10.2.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/bootstrap.min.js" th:src="@{/resources/sb-admin-v2/js/bootstrap.min.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/bootstrap-switch.js" th:src="@{/resources/sb-admin-v2/js/bootstrap-switch.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+
+        <!-- Page-Level Plugin Scripts - Dashboard -->
+        <script src="../../resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/plugins/morris/morris.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/morris.js}"></script>
+        <!-- Page-Level Plugin Scripts - Tables -->
+        <script src="../../resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js" th:src="@{/resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js}"></script>
+
+
+        <!-- SB Admin Scripts - Include with every page -->
+        <script src="../../resources/sb-admin-v2/js/sb-admin.js" th:src="@{/resources/sb-admin-v2/js/sb-admin.js}"></script>
+
+        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+        <script>
+        	function updateStatus() {
+            	$('#btnRefresh')[0].click();
+        	}
+        	setInterval(updateStatus, 60000);
+        	//
+        	$("#switch-state").bootstrapSwitch();
+        </script>
+
+    </body>
+
+</html>

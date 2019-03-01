@@ -1,0 +1,34 @@
+http://10.54.10.18:8003/iloto/v1/mtRequest?msisdn=x&content=x&
+http://10.54.10.18:8003/iloto/custcare/mt_history.html
+	- msisdn,startdate,enddate
+http://10.54.10.18:8003/iloto/custcare/cancel.html
+	- msisdn, package_code
+	
+	
+	
+	
+	
+	
+	
+		  {
+		   "id":"UpdateDataProcess-001",
+		   "order":28,
+		   "name":"Procress Update Data",
+		   "className":"vn.yotel.vbilling.thread.ProcessSyncSubsFromFileData",
+		   "autoStart":false,
+		   "delayTime":1800,
+		   "params": {
+			    "location-name":"",
+			    "local-dir":"/opt/tomcat8-billing/bin/cdr_data_iloto/",
+			    "local-style":"Directly",
+			    "local-file-format":"",
+			    "backup-dir":"/opt/tomcat8-billing/bin/cdr_data_iloto_backup/",
+			    "backup-style":"Daily",
+			    "backup-file-format":"",
+			    "temp-dir":"/opt/tomcat8-billing/bin/cdr_data_iloto_temp/",
+			    "date-format":"yyyyMMdd",
+			    "process-date":"20170724",
+			    "wildcard":"*_*.txt",
+			    "recursive":true
+			  }
+		  },

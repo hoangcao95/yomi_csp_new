@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<title data-th-text="#{admin.page.title}">Title</title>
+	
+	<!-- Core CSS - Include with every page -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" th:href="@{/resources/sb-admin-v2/css/bootstrap.min.css}" />
+	<link href="font-awesome/css/font-awesome.css" rel="stylesheet" th:href="@{/resources/sb-admin-v2/font-awesome/css/font-awesome.css}" />
+	<link rel="stylesheet" type="text/css" media="all" href="bootstrap-daterangepicker/daterangepicker-bs3.css" th:href="@{/resources/bootstrap-daterangepicker/daterangepicker-bs3.css}" />
+	
+	<!-- Page-Level Plugin CSS - Dashboard -->
+	<link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" th:href="@{/resources/sb-admin-v2/css/plugins/morris/morris-0.4.3.min.css}" />
+	<link href="css/plugins/timeline/timeline.css" rel="stylesheet" th:href="@{/resources/sb-admin-v2/css/plugins/timeline/timeline.css}" />
+	<link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" th:href="@{/resources/sb-admin-v2/css/plugins/dataTables/dataTables.bootstrap.css}" />
+	<!-- SB Admin CSS - Include with every page -->
+	<link href="css/sb-admin.css" rel="stylesheet" th:href="@{/resources/sb-admin-v2/css/sb-admin.css}" />
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<div id="nav_id" th:replace="nav :: nav">
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+				style="margin-bottom: 0">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".sidebar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+				</div>
+				<!-- /.navbar-header -->
+
+				<ul class="nav navbar-top-links navbar-right">
+				</ul>
+				<!-- /.navbar-top-links -->
+
+				<div class="navbar-default navbar-static-side" role="navigation"></div>
+				<!-- /.navbar-static-side -->
+			</nav>
+		</div>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h4 class="page-header">Danh sách NSD</h4>
+					</div>
+					<!-- /.col-lg-12 -->
+				</div>
+				<!-- /.row -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default" th:if="${page.content} != null">
+							<div class="panel-heading">Danh sách</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-hover" id="dataTables">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Username</th>
+												<th>Email</th>
+												<th>Full name</th>
+												<th>Ngày cập nhật</th>
+												<th>Trạng thái</th>
+												<th>Tác động</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="user,iterStat : ${page.content}">
+												<td th:text="${iterStat.count}"></td>
+												<td th:text="${user.userName}"></td>
+												<td th:text="${user.email}"></td>
+												<td th:text="${user.fullName}"></td>
+												<td th:text="${user.createdDate}"></td>
+												<td>
+													<span th:if="${user.status == 1}">Hoạt động</span> 
+													<span th:if="${user.status == 0}">Khóa</span>
+												</td>
+												<td>
+													<a sec:authorize="hasAnyRole('ROLE_ADMIN')" type="button" class="btn btn-warning btn-xs" th:href="@{/admin/user/{id}/update(id=${user.id})}" title="Cập nhật" th:text="#{button.action.update}"><i class="glyphicon glyphicon-edit"></i></a>
+													<a sec:authorize="hasAnyRole('ROLE_ADMIN')" type="button" class="btn btn-primary btn-xs" th:href="@{/admin/user/{id}/copy(id=${user.id})}" title="Copy" th:text="#{button.action.copy}"><i class="glyphicon glyphicon-edit"></i></a>
+													<a sec:authorize="hasAnyRole('ROLE_ADMIN')" type="button" class="btn btn-danger btn-xs" th:href="@{/admin/user/{id}/delete(id=${user.id})}" title="Xóa" Onclick="return ConfirmDelete()" th:text="#{button.action.delete}"><i class="fa fa-times"></i></a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- /.table-responsive -->
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- Core Scripts - Include with every page -->
+	<script src="js/jquery-1.10.2.js" th:src="@{/resources/sb-admin-v2/js/jquery-1.10.2.js}"></script>
+	<script src="js/bootstrap.min.js" th:src="@{/resources/sb-admin-v2/js/bootstrap.min.js}"></script>
+	<script src="js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+	<script src="../js/floatingtableheader.js" th:src="@{/resources/sb-admin-v2/js/floatingtableheader.js}"></script>
+		
+	<!-- Page-Level Plugin Scripts - Dashboard -->
+	<script src="js/plugins/morris/raphael-2.1.0.min.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js}"></script>
+	<script src="js/plugins/morris/morris.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/morris.js}"></script>
+	<!-- Page-Level Plugin Scripts - Tables -->
+	<script src="js/plugins/dataTables/jquery.dataTables.js" th:src="@{/resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js}"></script>
+	<!-- Page-Level Plugin Scripts - Tables -->
+	<script src="../js/plugins/dataTables/dataTables.bootstrap.js" th:src="@{/resources/sb-admin-v2/js/plugins/dataTables/dataTables.bootstrap.js}"></script>
+
+	<!-- SB Admin Scripts - Include with every page -->
+	<script src="js/sb-admin.js" th:src="@{/resources/sb-admin-v2/js/sb-admin.js}"></script>
+
+	<!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
+	<script type="text/javascript" src="bootstrap-daterangepicker/moment.js" th:src="@{/resources/bootstrap-daterangepicker/moment.js}"></script>
+	<script type="text/javascript" src="bootstrap-daterangepicker/daterangepicker.js" th:src="@{/resources/bootstrap-daterangepicker/daterangepicker.js}"></script>
+
+	<script>
+		$(document).ready(function() {
+            ActivateFloatingHeaders("#dataTables");
+		});
+		function ConfirmDelete() {
+			var x = confirm("Xóa?");
+			if (x)
+				return true;
+			else
+				return false;
+		}
+	</script>
+
+</body>
+
+</html>
+

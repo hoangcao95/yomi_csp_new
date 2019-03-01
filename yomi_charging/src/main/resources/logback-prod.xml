@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<property name="logging.directory" value="/u01/yomi/tomcat8-billing/logs_billing/"/>
+    <!--  local server log -->
+    <appender name="OPERATIONS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.directory}/${prefix}-log-for-operations-%d{yyyy-MM-dd}.txt</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${MESSAGE_FORMAT}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <appender name="SUPPORT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.directory}/${prefix}-log-for-support-%d{yyyy-MM-dd}.txt</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${MESSAGE_FORMAT}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+    </appender>
+
+    <appender name="QA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.directory}/${prefix}-log-for-qa-%d{yyyy-MM-dd}.txt</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${MESSAGE_FORMAT}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <appender name="DEVELOPMENT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         	<!-- daily and size rollover -->
+            <fileNamePattern>${logging.directory}/${prefix}-log-for-development-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+        	<charset>UTF-8</charset>
+            <pattern>${MESSAGE_FORMAT}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+   
+  
+   <!--  loggers define -->	
+    <!-- Log all SQL DML statements as they are executed: level = ON,OFF -->
+    <logger name="org.hibernate.SQL" level="OFF"/>
+    <!--   BasicBinder level = TRACE,OFF-->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="OFF"/>
+    
+   
+   <logger name="vn.yotel" level="DEBUG"/>
+   <logger name="vn.yotel.commons.rest.filter" level="DEBUG"/>
+   <logger name="vn.yotel.admin.web.controller" level="INFO"/>
+   <logger name="vn.yotel.admin.web.controller.report.SubCPController" level="INFO"/>
+   
+   <logger name="vn.yotel.admin.jobs" level="INFO"/>
+   <logger name="vn.yotel.jobs" level="WARN"/>
+   
+   <root level="WARN" > 
+        <appender-ref ref="OPERATIONS"/>
+        <appender-ref ref="SUPPORT"/>
+        <appender-ref ref="QA"/>
+        <appender-ref ref="DEVELOPMENT"/>
+   </root>
+</included>
+
+

@@ -1,0 +1,302 @@
+{
+	"threads": [
+		{
+			"id":"SMPPClient-001",
+			"name":"SMPP Transceiver 001",
+			"className":"vn.yotel.vbilling.thread.SMSTransceiverThread",
+			"autoStart":false,
+			"delayTime":30,
+			"order":0,
+			"params": {
+				"ipAddress": "10.151.183.154",
+				"port": 6200,
+				"systemId": "banthan",
+				"password": "khampha",
+				"bindMode": "TR",
+				"systemType": "SMSC",
+				"address-range": "90023",
+				"receiveTimeout": 2,
+				"mt-encoding":"UTF16"
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessMoRequest",
+			"autoStart": true,
+			"delayTime": 30,
+			"id": "MOProcess-001",
+			"name": "MO Process 001",
+			"order": 20,
+			"params": {
+				
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessContentRequest",
+			"autoStart": false,
+			"delayTime": 30,
+			"id": "ProcessContentRequest-001",
+			"name": "Buy Content Process 001",
+			"order": 21,
+			"params": {
+				
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessMtRequest",
+			"autoStart": true,
+			"delayTime": 30,
+			"id": "MTProcess-001",
+			"name": "MT Process 001",
+			"order": 22,
+			"params": {
+				
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessMtRequest",
+			"autoStart": false,
+			"delayTime": 30,
+			"id": "MTProcess-002",
+			"name": "MT Process 002",
+			"order": 22,
+			"params": {
+				
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessMtRequest",
+			"autoStart": false,
+			"delayTime": 30,
+			"id": "MTProcess-003",
+			"name": "MT Process 003",
+			"order": 22,
+			"params": {
+				
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessMtRequest",
+			"autoStart": false,
+			"delayTime": 30,
+			"id": "MTProcess-004",
+			"name": "MT Process 004",
+			"order": 22,
+			"params": {
+				
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessMtRequest",
+			"autoStart": false,
+			"delayTime": 30,
+			"id": "MTProcess-005",
+			"name": "MT Process 005",
+			"order": 22,
+			"params": {
+				
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessMtChargingCSPRequest",
+			"autoStart": true,
+			"delayTime": 30,
+			"id": "MTProcess-CSP-001",
+			"name": "MT Process (CSP) 001",
+			"order": 23,
+			"params": {
+				"short-code":"90023",
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessMtChargingCSPRequest",
+			"autoStart": true,
+			"delayTime": 30,
+			"id": "MTProcess-CSP-002",
+			"name": "MT Process CSP 002",
+			"order": 24,
+			"params": {
+				"short-code":"90023",
+			}
+		},
+		{
+			"className": "vn.yotel.vbilling.thread.ProcessSyncCpGate",
+			"autoStart": false,
+			"delayTime": 300,
+			"id": "SyncAPI-001",
+			"name": "Process SyncAPI 001",
+			"order": 25,
+			"params": {
+				"back-days": 1
+			}
+		},
+		{
+			"id": "GetDataFileProcess-001",
+			"order": 26,
+			"name": "Procress Get Data Files",
+			"className": "vn.yotel.thread.FTPReceiverThread",
+			"autoStart": false,
+			"delayTime": 1800,
+			"params": {
+				"host": "10.54.140.22",
+				"port": 21,
+				"user": "yomi",
+				"password": "yomi@123",
+				"transfer-type": "BINARY",
+				"connect-mode": "PASSIVE",
+				"listing-mode": "UNIX",
+				"timeout": 600000,
+				"local-dir": "/opt/tomcat8-billing/bin/cdr_data_yomi/",
+				"local-style": "Directly",
+				"local-file-format": "",
+				"remote-dir": "/u01/data/cp/9137/data/",
+				"remote-style": "Directly",
+				"remote-file-format": "",
+				"backup-dir": "",
+				"backup-style": "Directly",
+				"backup-file-format": "",
+				"temp-dir": "/opt/tomcat8-billing/bin/cdr_data_yomi_temp/",
+				"date-format": "yyyyMMdd_HHmmss",
+				"process-date": "20170720_104424",
+				"wildcard": "*_*.txt",
+				"recursive": false
+			}
+		},
+		{
+			"id": "GetCpsFileProcess-001",
+			"order": 27,
+			"name": "Procress Get Cps Files",
+			"className": "vn.yotel.thread.FTPReceiverThread",
+			"autoStart": false,
+			"delayTime": 1800,
+			"params": {
+				"host": "10.54.140.22",
+				"port": 21,
+				"user": "yomi",
+				"password": "yomi@123",
+				"transfer-type": "BINARY",
+				"connect-mode": "PASSIVE",
+				"listing-mode": "UNIX",
+				"timeout": 600000,
+				"local-dir": "/opt/tomcat8-billing/bin/cdr_cps_yomi/",
+				"local-style": "Daily",
+				"local-file-format": "",
+				"remote-dir": "/u01/data/cp/9137/cps/",
+				"remote-style": "Daily",
+				"remote-file-format": "",
+				"backup-dir": "",
+				"backup-style": "Directly",
+				"backup-file-format": "",
+				"temp-dir": "/opt/tomcat8-billing/bin/cdr_cps_yomi_temp/",
+				"date-format": "yyyyMMdd",
+				"process-date": "20170726",
+				"wildcard": "yomi*.cdr",
+				"recursive": true
+			}
+		},
+        {
+            "className": "vn.yotel.thread.ProcessZipFile",
+            "id": "ZipLogFile-001",
+            "name": "Process Zip Log File 001",
+            "autoStart": true,
+            "delayTime": 600,
+            "order": 40,
+            "params": {
+				"local-dir":"/u01/yomi/tomcat8-billing/logs_billing",
+				"local-style":"Directly",
+				"local-file-format":"",
+				"backup-dir":"",
+				"backup-style":"Delete file",
+				"backup-file-format":"",
+				"date-format":"yyyy-MM-dd",
+				"prefix-regex":"yomi-log-for-development-",
+				"suffix-regex":".[0-9]+.txt",
+				"start-time":"00:00:01",
+				"end-time":"23:59:59",
+				"temp-dir":"",
+				"wildcard":"yomi*.txt",
+				"recursive":false,
+				"location-name":"ProcessZipFile_001"
+            }
+        },
+        {
+            "className": "vn.yotel.thread.ProcessZipFile",
+            "id": "ZipLogFile-002",
+            "name": "Process Zip Log File 002",
+            "autoStart": true,
+            "delayTime": 600,
+            "order": 40,
+            "params": {
+				"local-dir":"/u01/yomi/tomcat8-billing/logs_billing",
+				"local-style":"Directly",
+				"local-file-format":"",
+				"backup-dir":"",
+				"backup-style":"Delete file",
+				"backup-file-format":"",
+				"date-format":"yyyy-MM-dd",
+				"prefix-regex":"yomi-log-for-(qa|support|operations)-",
+				"suffix-regex":".txt",
+				"start-time":"00:00:01",
+				"end-time":"23:59:59",
+				"temp-dir":"",
+				"wildcard":"yomi*.txt",
+				"recursive":false,
+				"location-name":"ProcessZipFile_002"
+            }
+        },
+		{
+			"className": "vn.yotel.thread.ProcessHACheck",
+			"id": "HA-Process",
+			"name": "Procress to handle High Availability",
+			"order": -1,
+			"autoStart": true,
+			"delayTime": 10,
+			"params": {
+				"vip-addr": "10.54.10.9"
+			}
+		},
+		{
+			"id": "ProcessSendDailySms-001",
+			"name": "MT Process Send MT Daily",
+			"className": "vn.yotel.vbilling.thread.ProcessSendDailySms",
+			"autoStart": false,
+			"delayTime": 1200,
+			"order": 42,
+			"params": {
+				"mt-suffix-dailysms1": ". De xem chi tiet truy cap http://yomi.vn. Tu choi nhan tin hang ngay, soan TC gui 9137. LH: 19000105 (1.000đ/phút)",
+				"mt-suffix-dailysms2": "(ND) Xin chào <MSISDN>, để xem hôm nay có phải ngày may mắn với quý khách hay không, truy cập <LINK> . LH: 19000105 (1.000đ/phút)",
+				"mt-suffix-dailysms":  "(ND) Xin chào <MSISDN>, hãy xem hôm nay có phải ngày may mắn với bạn hay không, truy cập http://yomi.vn . Từ chối nhận tin thông báo soạn TC SMS gửi 9137. Chi tiết liên hệ 19000105 (1.000VNĐ/phut). Trân trọng cảm ơn!",
+				"config-file": "/u01/yomi/billing/shared_storage/news_3day_sms_config.txt",
+				"start-time": "08:00:01",
+				"is-dev":false,
+				"msisdns-test":"904596082;936516686;931399556",
+				"tps":10,
+				"list-packageid":"1,5,2,7",
+				"is-greater":true,
+				"start-date":"20170921",
+				"hour-start": "10",
+				"first-time": true,
+			}
+		},
+		{
+			"id": "ProcessSendDailySmsForDayPackage-001",
+			"name": "MT Process Send MT Daily for package",
+			"className": "vn.yotel.vbilling.thread.ProcessSendDailySmsForDayPackage",
+			"autoStart": false,
+			"delayTime": 1200,
+			"order": 41,
+			"params": {
+				"mt-suffix-dailysms": "(GH) Quý khách đang sử dụng gói cước <TENGOI> của dịch vụ Yomi do Hà Thành Telecom cung cấp. Hạn sử dụng đến <HANSUDUNG>, giá cước <GIAGOI>. Chi tiết liên hệ 19000105 (1.000đ/phút). Để từ chối nhận thông báo dịch vụ đang sử dụng, vui lòng soạn TC SMS gửi 9137. Trân trọng cảm ơn!",
+				"start-time": "09:00:01",
+				"list-packageid":"1,5,2,7",
+				"is-dev":false,
+				"msisdns-test":"904596082;936516686;931399556",
+				"is-greater":true,
+				"start-date":"20170921",
+				"tps":10,
+				"config-file": "/u01/yomi/billing/shared_storage/7day_sms_config.txt",
+				"hour-start": "10",
+				"first-time": true,
+			}
+		},
+	]
+}

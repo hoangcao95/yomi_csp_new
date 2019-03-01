@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="fragments/init :: head">
+   		<title>Cập nhật MT</title>    
+ 	</head>
+
+    <body>
+        <div id="wrapper">
+            <div id="nav_id" th:replace="nav :: nav">
+            </div>
+            <div id="page-wrapper" style="min-height: 600px;">
+            	<div class="panel-body">
+					<div class="row">
+							<form role="form" th:action="@{/param/mt/update.html}" th:object="${mtModel}" method="POST">
+                               	<div class="col-lg-12">
+                                       <fieldset>
+										   <div class="form-group">
+												<label for="mtHD">HD</label>
+												<textarea class="form-control" rows="3" id="mtHD" name = "mtHD" type="text" placeholder="HD" th:inline="text">[[${mtModel.mtHD}]]</textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <label for="mtHDXS">HD XS</label>
+                                               <textarea class="form-control" rows="3" id="mtHDXS" name = "mtHDXS" type="text" placeholder="HD XS" th:inline="text">[[${mtModel.mtHDXS}]]</textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <label for="mtHDDT">HD DT</label>
+                                               <textarea class="form-control" rows="3" id="mtHDDT" name = "mtHDDT" type="text" placeholder="HD DT" th:inline="text">[[${mtModel.mtHDDT}]]</textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <label for="mtKT">KT</label>
+                                               <textarea class="form-control" rows="3" id="mtKT" name = "mtKT" type="text" placeholder="KT" th:inline="text">[[${mtModel.mtKT}]]</textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <label for="mtKT">NonSubsKT</label>
+                                               <textarea class="form-control" rows="3" id="mtNonSubsKT" name = "mtNonSubsKT" type="text" placeholder="NonSubsKT" th:inline="text">[[${mtModel.mtNonSubsKT}]]</textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <label for="mtMK">MK</label>
+                                               <textarea class="form-control" rows="3" id="mtMK" name = "mtMK" type="text" placeholder="MK" th:inline="text">[[${mtModel.mtMK}]]</textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <label for="mtNonSubsMK">NonSubsMK</label>
+                                               <textarea class="form-control" rows="3" id="mtNonSubsMK" name = "mtNonSubsMK" type="text" placeholder="NonSubsMK" th:inline="text">[[${mtModel.mtNonSubsMK}]]</textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <label for="mtInvalid">Sai cú pháp</label>
+                                               <textarea class="form-control" rows="3" id="mtInvalid" name = "mtInvalid" type="text" placeholder="Invalid" th:inline="text">[[${mtModel.mtInvalid}]]</textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <label for="mtInvalid">Lỗi hệ thống</label>
+                                               <textarea class="form-control" rows="3" id="mtSystemError" name = "mtSystemError" type="text" placeholder="Lỗi hệ thống" th:inline="text">[[${mtModel.mtSystemError}]]</textarea>
+                                           </div>
+                                           <button type="submit" id="btnUpdateMT" class="btn btn-primary">Cập nhật</button>
+                                       </fieldset>
+                               	</div>
+                               	<!-- /.col-lg-12-->
+                            </form>
+							<!-- End form -->
+					</div>
+				</div>
+            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+
+		<div th:replace="fragments/init :: commonScript"></div>
+		<!-- Core Scripts - Include with every page -->
+        <script src="../../resources/sb-admin-v2/js/jquery-1.10.2.js" th:src="@{/resources/sb-admin-v2/js/jquery-1.10.2.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/bootstrap.min.js" th:src="@{/resources/sb-admin-v2/js/bootstrap.min.js}"></script>
+        <script src="../../resources/bootstrap-select-1.12.2/js/bootstrap-select.min.js" th:src="@{/resources/bootstrap-select-1.12.2/js/bootstrap-select.min.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+	        	function validateMyForm() {
+	        		return false;
+	        	};
+			});
+		</script>
+    </body>
+
+</html>

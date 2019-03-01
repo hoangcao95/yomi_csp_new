@@ -1,0 +1,192 @@
+{
+    "threads": [
+        {
+          "id":"SMPPClient-001",
+          "name":"SMPP Transceiver 001",
+          "className":"vn.yotel.vbilling.thread.SMSTransceiverThread",
+          "autoStart":false,
+          "delayTime":30,
+          "order":0,
+          "params": {
+            "ipAddress": "10.151.183.154",
+            "port": 6200,
+            "systemId": "banthan",
+            "password": "khampha",
+            "bindMode": "TR",
+            "systemType": "SMSC",
+            "address-range": "90023",
+            "receiveTimeout": 2,
+            "mt-encoding":"UTF16"
+          }
+        },
+		{
+			"id":"SMPPClient-002",
+			"name":"SMPP Transceiver 001 (HCM)",
+			"className":"vn.yotel.vbilling.thread.SMSTransceiverThread",
+			"autoStart":false,
+			"delayTime":30,
+			"order":0,
+			"params": {
+				"ipAddress":"127.0.0.1",
+				"port":6200,
+				"systemId":"yomi",
+				"password":"aixoso",
+				"bindMode":"T",
+				"systemType":"SMSC",
+				"address-range":"9139",
+				"receiveTimeout":2,
+				"mt-encoding":""
+			}
+		},
+        {
+        	"className": "vn.yotel.vbilling.thread.ProcessMoRequest",
+            "autoStart": true,
+            "delayTime": 30,
+            "id": "MOProcess-001",
+            "name": "MO Process 001",
+            "order": 1,
+            "params": {
+              "mt-system-error": "Đã có lỗi xảy ra với hệ thống, vui lòng thử lại sau. LH: 19000105 (1.000đ/phút). Trân trọng cảm ơn!",
+              "mt-reset-password": "Mật khẩu đăng nhập dịch vụ Yomi – Khám phá bản thân của quý khách là <MATKHAU> . Truy cập: http://yomi.vn để sử dụng dịch vụ. LH: 19000105 (1.000đ/phút).",
+              "mt-set-password": "Mật khẩu đăng nhập dịch vụ Yomi – Khám phá bản thân của quý khách là <MATKHAU> . Truy cập: http://yomi.vn để sử dụng dịch vụ. LH: 19000105 (1.000đ/phút).",
+              "mt-pwd-failed": "Hiện tại, Quý khách chưa sử dụng gói cước nào của dịch vụ Yomi. Để đăng ký sử dụng dịch vụ, soạn ngay: DK PT gửi 9137. Chi tiết liên hệ 19000105 (1.000đ/phút). Trân trọng cảm ơn!",
+              "mt-check-subs-success": "Quý khách đang sử dụng gói cước <TENGOI> của dịch vụ Yomi. Giá cước <GIAGOI>. Đăng ký từ <NGAYDANGKY>. Hạn sử dụng tới <HANSUDUNG>. Để hủy dịch vụ, soạn HUY <MAGOI> gửi 9137. Chi tiết liên hệ 19000105 (1.000đ/phút). Trân trọng cảm ơn!",
+              "mt-check-subs-failed": "Hiện tại, Quý khách chưa sử dụng gói cước nào của dịch vụ Yomi. Để đăng ký sử dụng dịch vụ, soạn ngay: DK PT gửi 9137. Chi tiết liên hệ 19000105 (1.000đ/phút). Trân trọng cảm ơn!",
+
+            }
+        },
+        {
+        	"className": "vn.yotel.vbilling.thread.ProcessContentRequest",
+            "autoStart": true,
+            "delayTime": 30,
+            "id": "ProcessContentRequest-001",
+            "name": "Buy Content Process 001",
+            "order": 2,
+            "params": {
+            }
+        },
+        {
+            "className": "vn.yotel.vbilling.thread.ProcessMtRequest",
+            "autoStart": true,
+            "delayTime": 30,
+            "id": "MTProcess-001",
+            "name": "MT Process 001",
+            "order": 3,
+            "params": {
+            }
+        },
+        {
+            "className": "vn.yotel.vbilling.thread.ProcessMtChargingCSPRequest",
+            "autoStart": true,
+            "delayTime": 30,
+            "id": "MTProcess-CSP-001",
+            "name": "MT Process (CSP) 001",
+            "order": 23,
+            "params": {
+              "short-code":"90023",
+            }
+        },
+        {
+            "className": "vn.yotel.vbilling.thread.ProcessMtChargingCSPRequest",
+            "autoStart": true,
+            "delayTime": 30,
+            "id": "MTProcess-CSP-002",
+            "name": "MT Process CSP 002",
+            "order": 24,
+            "params": {
+              "short-code":"90023",
+            }
+        },
+        {
+            "className": "vn.yotel.vbilling.thread.ProcessSyncCpGate",
+            "autoStart": false,
+            "delayTime": 300,
+            "id": "SyncAPI-001",
+            "name": "Process SyncAPI 001",
+            "order": 4,
+            "params": {
+            	"back-days":1
+            }
+        },
+        {
+            "className": "vn.yotel.thread.ProcessZipFile",
+            "id": "ZipLogFile-001",
+            "name": "Process Zip Log File 001",
+            "autoStart": false,
+            "delayTime": 600,
+            "order": 40,
+            "params": {
+				"local-dir":"D:/httelecom/yomi/code/yomi_billing/yomi_charging/logs/data",
+				"local-style":"Directly",
+				"local-file-format":"",
+				"backup-dir":"",
+				"backup-style":"Delete file",
+				"backup-file-format":"",
+				"date-format":"yyyy-MM-dd",
+				"prefix-regex":"yomi-log-for-(development|qa1)-",
+				"suffix-regex":".[0-9]+.txt",
+				"start-time":"00:00:01",
+				"end-time":"23:59:59",
+				"temp-dir":"",
+				"wildcard":"yomi*.txt",
+				"recursive":false,
+				"location-name":"ProcessZipFile_001"
+            }
+        },
+        {
+            "autoStart": true,
+            "className": "vn.yotel.thread.ProcessHACheck",
+            "delayTime": 10,
+            "id": "HA-Process",
+            "name": "Procress to handle High Availability",
+            "order": 9999,
+            "params": {
+                "vip-addr": "127.0.0.1"
+            }
+        },
+        {
+          "id": "ProcessSendDailySms-001",
+          "name": "MT Process Send MT Daily",
+          "className": "vn.yotel.vbilling.thread.ProcessSendDailySms",
+          "autoStart": true,
+          "delayTime": 1200,
+          "order": 42,
+          "params": {
+            "mt-suffix-dailysms1": ". De xem chi tiet truy cap http://yomi.vn. Tu choi nhan tin hang ngay, soan TC gui 9137. LH: 19000105 (1.000đ/phút)",
+            "mt-suffix-dailysms2": "(ND) Xin chào <MSISDN>, để xem hôm nay có phải ngày may mắn với quý khách hay không, truy cập <LINK> . LH: 19000105 (1.000đ/phút)",
+            "mt-suffix-dailysms":  "(ND) Xin chào <MSISDN>, hãy xem hôm nay có phải ngày may mắn với bạn hay không, truy cập http://yomi.vn . Từ chối nhận tin thông báo soạn TC SMS gửi 9137. Chi tiết liên hệ 19000105 (1.000VNĐ/phut). Trân trọng cảm ơn!",
+            "config-file": "shared_storage/news_3day_sms_config.txt",
+            "start-time": "08:00:01",
+            "is-dev":false,
+            "msisdns-test":"904596082;936516686;931399556",
+            "tps":10,
+            "list-packageid":"1,5,2,7",
+            "is-greater":true,
+            "start-date":"20170921",
+            "hour-start": "10",
+            "first-time": true,
+          }
+        },
+        {
+          "id": "ProcessSendDailySmsForDayPackage-001",
+          "name": "MT Process Send MT Daily for package",
+          "className": "vn.yotel.vbilling.thread.ProcessSendDailySmsForDayPackage",
+          "autoStart": true,
+          "delayTime": 1200,
+          "order": 41,
+          "params": {
+            "mt-suffix-dailysms": "(GH) Quý khách đang sử dụng gói cước <TENGOI> của dịch vụ Yomi do Hà Thành Telecom cung cấp. Hạn sử dụng đến <HANSUDUNG>, giá cước <GIAGOI>. Chi tiết liên hệ 19000105 (1.000đ/phút). Để từ chối nhận thông báo dịch vụ đang sử dụng, vui lòng soạn TC SMS gửi 9137. Trân trọng cảm ơn!",
+            "start-time": "09:00:01",
+            "list-packageid":"1,5,2,7",
+            "is-dev":false,
+            "msisdns-test":"904596082;936516686;931399556",
+            "is-greater":true,
+            "start-date":"20170921",
+            "tps":10,
+            "config-file": "shared_storage/7day_sms_config.txt",
+            "hour-start": "10",
+            "first-time": true,
+          }
+        },
+    ]
+}

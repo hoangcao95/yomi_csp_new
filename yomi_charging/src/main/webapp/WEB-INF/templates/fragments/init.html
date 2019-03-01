@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head th:fragment="head">
+		<meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <title>Yomi</title>
+        <link th:href="@{/resources/sb-admin-v2/css/plugins/dataTables/dataTables.bootstrap.css}" rel="stylesheet"/>
+        <link th:href="@{/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+		
+        <!-- Core CSS - Include with every page -->
+        <link href="../../../resources/sb-admin-v2/css/bootstrap.min.css" rel="stylesheet"  th:href="@{/resources/sb-admin-v2/css/bootstrap.min.css}"/>
+        <link href="../../../resources/sb-admin-v2/font-awesome/css/font-awesome.css" rel="stylesheet"  th:href="@{/resources/sb-admin-v2/font-awesome/css/font-awesome.css}"/>
+        <link href="../../../resources/sb-admin-v2/css/bootstrap-switch.css" rel="stylesheet"  th:href="@{/resources/sb-admin-v2/css/bootstrap-switch.css}"/>
+        <link href="../../../resources/bootstrap-select-1.12.2/css/bootstrap-select.min.css" rel="stylesheet"  th:href="@{/resources/bootstrap-select-1.12.2/css/bootstrap-select.min.css}"/>
+        <link href="../../../resources/sb-admin-v2/css/metisMenu.min.css" rel="stylesheet"  th:href="@{/resources/sb-admin-v2/css/metisMenu.min.css}"/>
+
+        <!-- Page-Level Plugin CSS - Dashboard -->
+        <link href="../../../resources/sb-admin-v2/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet"  th:href="@{/resources/sb-admin-v2/css/plugins/morris/morris-0.4.3.min.css}"/>
+        <link href="../../resources/sb-admin-v2/css/plugins/timeline/timeline.css" rel="stylesheet"  th:href="@{/resources/sb-admin-v2/css/plugins/timeline/timeline.css}"/>
+
+        <!-- SB Admin CSS - Include with every page -->
+        <link href="../../../resources/sb-admin-v2/css/sb-admin.css" rel="stylesheet"  th:href="@{/resources/sb-admin-v2/css/sb-admin.css}"/>
+		<link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAOxJREFUeNqsU8ENgzAMjGgHyAgZgWefHSEjZJSM0E6QEWgniDoB3/7CBoxATeVKlmWTVGDphHLEh33YxujhAFbgLb77KwJgQYQGvhozSVywIse4WUo8K4K81WvDnW90iuDU0MVU86wARkAP8Ky9HkE5j9yIuUHzrCC3JkR8GoUrkqfc7IWJGFKhYeI8z3WKF44YPzJYdkf0NQmerZGFKjKpmvKJj0DCy1FJkD4YMSdpY0Rj2BAc9qyehqbV6xXfNGTh72+OQSu8JJh3CObaLh8Sh7R8IoJvnKULm/wH4Al44dmymbsB7r/DR4ABAMC8mgcFzLfNAAAAAElFTkSuQmCC" />
+    	<meta th:if="${_csrf} != null" th:name="_csrf" th:content="${_csrf.token}"/>
+		<meta th:if="${_csrf} != null" th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    </head>
+    <body>
+         <div th:fragment="extra">
+             <p>Extra Content Fragment </p>             
+         </div>
+
+		<div th:fragment="commonScript">
+			<!-- Core Scripts - Include with every page -->
+	        <script src="../../resources/sb-admin-v2/js/jquery-1.10.2.js" th:src="@{/resources/sb-admin-v2/js/jquery-1.10.2.js}"></script>
+	        <script src="../../resources/sb-admin-v2/js/bootstrap.min.js" th:src="@{/resources/sb-admin-v2/js/bootstrap.min.js}"></script>
+            <script th:src="@{/resources/bootstrap-datetimepicker/js/moment.min.js}"></script>
+	        <script src="../../resources/sb-admin-v2/js/bootstrap-switch.js" th:src="@{/resources/sb-admin-v2/js/bootstrap-switch.js}"></script>
+	        <script src="../../resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+	
+	        <!-- Page-Level Plugin Scripts - Dashboard -->
+	        <script src="../../resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js}"></script>
+	        <script src="../../resources/sb-admin-v2/js/plugins/morris/morris.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/morris.js}"></script>
+	        <!-- Page-Level Plugin Scripts - Tables -->
+	        <script src="../../resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js" th:src="@{/resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js}"></script>
+            <script th:src="@{/resources/sb-admin-v2/js/plugins/dataTables/dataTables.bootstrap.js}"></script>
+            <script th:src="@{/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+	
+	
+	        <!-- SB Admin Scripts - Include with every page -->
+	        <script src="../../resources/sb-admin-v2/js/sb-admin.js" th:src="@{/resources/sb-admin-v2/js/sb-admin.js}"></script>
+			
+		</div>
+</body>
+</html>
